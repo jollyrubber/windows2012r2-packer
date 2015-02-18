@@ -191,6 +191,14 @@
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
             </FirstLogonCommands>
+            <AutoLogon>
+                <Password>
+                    <Value>dgBhAGcAcgBhAG4AdABQAGEAcwBzAHcAbwByAGQA</Value>
+                    <PlainText>false</PlainText>
+                </Password>
+                <Enabled>true</Enabled>
+                <Username>vagrant</Username>
+            </AutoLogon>
         </component>
     </settings>
     <settings pass="specialize">
