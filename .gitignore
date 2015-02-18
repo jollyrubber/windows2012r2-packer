@@ -1,3 +1,6 @@
+/iso/*
+/output-*/
+
 # Cache objects
 packer_cache/
 
