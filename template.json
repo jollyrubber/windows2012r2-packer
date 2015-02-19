@@ -49,7 +49,7 @@
       "scripts": [
         "./scripts/vm-guest-tools.bat",
         "./scripts/vagrant-ssh.bat",
-		"./scripts/disable-auto-logon.bat"
+        "./scripts/disable-auto-logon.bat"
       ]
     },
     {
