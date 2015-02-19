@@ -114,37 +114,11 @@
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c wmic useraccount where "name='vagrant'" set PasswordExpires=FALSE</CommandLine>
-                    <Order>4</Order>
-                    <Description>Disable password expiration for vagrant user</Description>
-                </SynchronousCommand>
-                
-                <!-- Option 1: OpenSSH Only -->
-                <SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c powershell -File a:\openssh.ps1 -AutoStart</CommandLine>
                     <Description>Install OpenSSH</Description>
-                    <Order>99</Order>
+                    <Order>4</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
-                <!-- End Option 1 -->
-                
-                <!-- Option 2: Windows Update + Open SSH. The OpenSSH install will be called by the windows update script, otherwise
-                      the open ssh install would finish before the windows update ever did -->
-                <!--
-                <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c a:\microsoft-updates.bat</CommandLine>
-                    <Order>99</Order>
-                    <Description>Enable Microsoft Updates</Description>
-                    <RequiresUserInput>true</RequiresUserInput>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c powershell -File a:\win-updates.ps1</CommandLine>
-                    <Description>Install Windows Updates</Description>
-                    <Order>100</Order>
-                    <RequiresUserInput>true</RequiresUserInput>
-                </SynchronousCommand>
-                -->
-                <!-- End Option 2 -->
                 
             </FirstLogonCommands>
             <AutoLogon>

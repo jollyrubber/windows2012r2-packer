@@ -16,9 +16,7 @@
       "floppy_files": [
         "./Autounattend.xml",
         "./scripts/enable-winrm.bat",
-        "./scripts/openssh.ps1",
-        "./scripts/microsoft-updates.bat",
-        "./scripts/win-updates.ps1"
+        "./scripts/openssh.ps1"
       ],
       "vboxmanage": [
         [
