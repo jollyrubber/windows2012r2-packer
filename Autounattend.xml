@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
-    <servicing></servicing>
     <settings pass="windowsPE">
         <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <DiskConfiguration>
@@ -96,30 +95,35 @@
             </OOBE>
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
+                    <CommandLine>%WINDIR%\System32\Dism /online /enable-feature /featurename:NetFx3 /All /Source:D:\sources\sxs /LimitAccess</CommandLine>
+                    <Order>1</Order>
+                    <Description>Install .NET 3.5</Description>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</CommandLine>
                     <Description>Set Execution Policy 64 Bit</Description>
-                    <Order>1</Order>
+                    <Order>2</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <CommandLine>C:\Windows\SysWOW64\cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</CommandLine>
                     <Description>Set Execution Policy 32 Bit</Description>
-                    <Order>2</Order>
+                    <Order>3</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c a:\enable-winrm.bat</CommandLine>
                     <Description>Enable WinRM</Description>
-                    <Order>3</Order>
+                    <Order>4</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c powershell -File a:\openssh.ps1 -AutoStart</CommandLine>
                     <Description>Install OpenSSH</Description>
-                    <Order>4</Order>
+                    <Order>5</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
-                
             </FirstLogonCommands>
             <AutoLogon>
                 <Password>
