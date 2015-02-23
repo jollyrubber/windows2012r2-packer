@@ -46,16 +46,9 @@
       "remote_path": "/tmp/script.ps1",
       "execute_command": "{{.Vars}} cmd /c powershell -File C:/Windows/Temp/script.ps1",
       "scripts": [
-        "./scripts/vm-guest-tools.ps1"
-      ]
-    },
-    {
-      "type": "shell",
-      "remote_path": "/tmp/script.bat",
-      "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
-      "scripts": [
-        "./scripts/vagrant-ssh.bat",
-        "./scripts/disable-auto-logon.bat"
+        "./scripts/vm-guest-tools.ps1",
+        "./scripts/vagrant-ssh.ps1",
+        "./scripts/compact.ps1"
       ]
     },
     {
