@@ -1,4 +1,6 @@
 /iso/*
+!/iso/download.ps1
+
 /output-*/
 
 # Cache objects
