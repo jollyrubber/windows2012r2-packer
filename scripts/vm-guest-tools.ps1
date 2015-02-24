@@ -17,7 +17,4 @@ if([string]::Compare($env:PACKER_BUILDER_TYPE, "virtualbox-iso", $True) -eq 0) {
 	# install addtions
     $additions = $target + "\VBoxWindowsAdditions.exe"
     &$additions  /S
-	
-	# be patient
-	Start-Sleep -Seconds 10
 }

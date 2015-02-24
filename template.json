@@ -18,6 +18,7 @@
         "./scripts/enable-winrm.bat",
         "./scripts/openssh.ps1"
       ],
+      "vm_name": "windows2012r2",
       "vboxmanage": [
         [
           "modifyvm",
