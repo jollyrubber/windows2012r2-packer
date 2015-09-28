@@ -7,64 +7,45 @@
       "iso_checksum": "458ff91f8abc21b75cb544744bf92e6a",
       "headless": true,
       "boot_wait": "2m",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "ssh_wait_timeout": "4h",
+      "communicator": "winrm",
+      "winrm_username": "{{user `vagrant_user`}}",
+      "winrm_password": "{{user `vagrant_password`}}",
+      "winrm_timeout": "4h",
+      "guest_additions_mode": "attach",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
       "guest_os_type": "Windows2012_64",
       "disk_size": 64000,
       "floppy_files": [
         "./Autounattend.xml",
-        "./scripts/enable-winrm.bat",
-        "./scripts/openssh.ps1"
+        "./scripts/enable-winrm.bat"
       ],
-      "vm_name": "windows2012r2",
+      "vm_name": "{{user `vmname`}}",
       "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--memory",
-          "2048"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpus",
-          "2"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--vram",
-          "32"
-        ]
+        [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "32" ]
       ]
     }
   ],
   "provisioners": [
     {
-      "type": "shell",
-      "remote_path": "/tmp/script.ps1",
-      "execute_command": "{{.Vars}} cmd /c powershell -File C:/Windows/Temp/script.ps1",
-      "scripts": [
-        "./scripts/vm-guest-tools.ps1",
-        "./scripts/vagrant-ssh.ps1",
-        "./scripts/compact.ps1"
-      ]
-    },
-    {
-      "type": "shell",
-      "inline": [
-        "rm -rf /tmp/*"
-      ]
+      "type": "powershell",
+      "script": "./scripts/vm-guest-tools.ps1",
+      "elevated_user": "{{user `vagrant_user`}}",
+      "elevated_password": "{{user `vagrant_password`}}"
     }
   ],
   "post-processors": [
     {
       "type": "vagrant",
       "keep_input_artifact": false,
-      "output": "windows2012r2.{{.Provider}}.box",
+      "output": "{{user `vmname`}}.{{.Provider}}.box",
       "vagrantfile_template": "vagrantfile.template"
     }
-  ]
+  ],
+  "variables": {
+      "vmname": "windows2012r2",
+      "vagrant_user": "vagrant",
+      "vagrant_password": "vagrant"
+  }
 }

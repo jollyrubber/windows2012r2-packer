@@ -1,4 +1,4 @@
-﻿[System.Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem") | Out-Null
+[System.Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem") | Out-Null
 
 # Ultra Defrag
 $pathToZip = "C:\Windows\Temp\ultradefrag.zip"
@@ -6,7 +6,7 @@ if(!(Test-Path -Path $pathToZip)) {
     # download
     Write-Verbose "downloading ultradefrag"
     (New-Object System.Net.WebClient). `
-        DownloadFile("http://downloads.sourceforge.net/ultradefrag/ultradefrag-portable-6.0.2.bin.amd64.zip", `
+        DownloadFile("http://downloads.sourceforge.net/project/ultradefrag/stable-release/6.1.0/ultradefrag-portable-6.1.0.bin.amd64.zip", `
                      $pathToZip)
 }
 $ultradefrag = "C:\Windows\Temp\ultradefrag-portable-6.0.2.amd64\udefrag.exe"
