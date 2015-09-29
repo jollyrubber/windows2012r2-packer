@@ -1,5 +1,3 @@
-Import-Module BitsTransfer
-
 if([string]::Compare($env:PACKER_BUILDER_TYPE, "virtualbox-iso", $True) -eq 0) {
 
     $vboxVersion = Get-Content ~\.vbox_version
@@ -10,12 +8,12 @@ if([string]::Compare($env:PACKER_BUILDER_TYPE, "virtualbox-iso", $True) -eq 0) {
     Set-Location $env:TEMP
 
     # download ISO
-    if(!(Test-Path -Path $isoFile)) {
-            Start-BitsTransfer -Source $isoUrl -Destination $isoFile
+    $imagePath = Join-Path $env:TEMP $isoFile
+    if(!(Test-Path -Path $imagePath)) {
+        (New-Object System.Net.WebClient).DownloadFile($isoUrl, $imagePath)
     }
 
     # mount
-    $imagePath = Join-Path $env:TEMP $isoFile
     Mount-DiskImage -ImagePath $imagePath
     # copy
     $source = (Get-DiskImage $imagePath | Get-Volume).DriveLetter + ":\"
@@ -24,7 +22,7 @@ if([string]::Compare($env:PACKER_BUILDER_TYPE, "virtualbox-iso", $True) -eq 0) {
     Copy-Item $source $target -Recurse
     # unmount
     Dismount-DiskImage $imagePath
-    Remove-Item -Path $imagePath -Force
+    Remove-Item -Path $imagePath -Force -ErrorAction SilentlyContinue
     # install cert
     $certUtil = Join-Path $target "cert\VBoxCertUtil.exe"
     $cert = Join-Path $target "cert\oracle-vbox.cer"
