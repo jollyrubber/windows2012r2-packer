@@ -30,6 +30,12 @@
   "provisioners": [
     {
       "type": "powershell",
+      "script": "./scripts/vs-hotfixes.ps1",
+      "elevated_user": "{{user `vagrant_user`}}",
+      "elevated_password": "{{user `vagrant_password`}}"
+    },
+    {
+      "type": "powershell",
       "script": "./scripts/vm-guest-tools.ps1",
       "elevated_user": "{{user `vagrant_user`}}",
       "elevated_password": "{{user `vagrant_password`}}"
